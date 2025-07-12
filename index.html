@@ -5,17 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🚀 Seminário Quicksort - Demonstração Interativa</title>
     <style>
-        :root {
-            --primary-blue: #1e3a8a;
-            --secondary-blue: #3b82f6;
-            --accent-green: #10b981;
-            --dark-green: #059669;
-            --light-blue: #60a5fa;
-            --white: #ffffff;
-            --light-gray: #f3f4f6;
-            --dark-gray: #1f2937;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -24,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 50%, var(--accent-green) 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             min-height: 100vh;
             overflow-x: hidden;
@@ -39,27 +28,21 @@
         .header {
             text-align: center;
             padding: 40px 0;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 15px;
             margin-bottom: 30px;
             backdrop-filter: blur(10px);
-            border: 2px solid rgba(16, 185, 129, 0.3);
         }
 
         .header h1 {
             font-size: 3.5em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(45deg, var(--white), var(--accent-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .header p {
             font-size: 1.2em;
             opacity: 0.9;
-            color: var(--light-gray);
         }
 
         .team-info {
@@ -71,17 +54,15 @@
         }
 
         .team-member {
-            background: linear-gradient(135deg, var(--accent-green), var(--dark-green));
+            background: rgba(255, 255, 255, 0.1);
             padding: 15px 20px;
             border-radius: 10px;
             text-align: center;
             transition: transform 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .team-member:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
         }
 
         .nav-tabs {
@@ -94,7 +75,7 @@
 
         .nav-tab {
             padding: 15px 25px;
-            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            background: rgba(255, 255, 255, 0.1);
             border: none;
             border-radius: 10px;
             color: white;
@@ -102,19 +83,16 @@
             transition: all 0.3s ease;
             font-size: 1.1em;
             backdrop-filter: blur(5px);
-            border: 2px solid transparent;
         }
 
         .nav-tab:hover {
-            background: linear-gradient(135deg, var(--accent-green), var(--dark-green));
+            background: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
         }
 
         .nav-tab.active {
-            background: linear-gradient(135deg, var(--accent-green), var(--dark-green));
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
-            border-color: var(--white);
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .content-section {
@@ -124,7 +102,6 @@
             border-radius: 15px;
             margin-bottom: 30px;
             backdrop-filter: blur(10px);
-            border: 2px solid rgba(16, 185, 129, 0.2);
         }
 
         .content-section.active {
@@ -138,12 +115,11 @@
         }
 
         .visualization-container {
-            background: linear-gradient(135deg, var(--dark-gray), var(--primary-blue));
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 10px;
             padding: 20px;
             margin: 20px 0;
             min-height: 200px;
-            border: 2px solid var(--accent-green);
         }
 
         .array-container {
@@ -157,7 +133,7 @@
         .array-element {
             width: 60px;
             height: 60px;
-            background: linear-gradient(45deg, var(--secondary-blue), var(--primary-blue));
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -168,30 +144,25 @@
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
-            border: 2px solid transparent;
         }
 
         .array-element:hover {
             transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.5);
-            border-color: var(--accent-green);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .array-element.pivot {
-            background: linear-gradient(45deg, var(--accent-green), var(--dark-green));
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
             animation: pulse 1s infinite;
-            border-color: var(--white);
         }
 
         .array-element.comparing {
-            background: linear-gradient(45deg, #f59e0b, #d97706);
+            background: linear-gradient(45deg, #ffa726, #ff9800);
             animation: shake 0.5s ease-in-out;
-            border-color: var(--white);
         }
 
         .array-element.sorted {
-            background: linear-gradient(45deg, var(--accent-green), var(--dark-green));
-            border-color: var(--white);
+            background: linear-gradient(45deg, #66bb6a, #4caf50);
         }
 
         @keyframes pulse {
@@ -222,39 +193,23 @@
             transition: all 0.3s ease;
             color: white;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            border: 2px solid transparent;
         }
 
         .btn-primary {
-            background: linear-gradient(45deg, var(--secondary-blue), var(--primary-blue));
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(45deg, var(--primary-blue), var(--dark-gray));
-            border-color: var(--accent-green);
+            background: linear-gradient(45deg, #667eea, #764ba2);
         }
 
         .btn-secondary {
-            background: linear-gradient(45deg, var(--accent-green), var(--dark-green));
-        }
-
-        .btn-secondary:hover {
-            background: linear-gradient(45deg, var(--dark-green), var(--primary-blue));
-            border-color: var(--white);
+            background: linear-gradient(45deg, #f093fb, #f5576c);
         }
 
         .btn-success {
-            background: linear-gradient(45deg, var(--light-blue), var(--secondary-blue));
-        }
-
-        .btn-success:hover {
-            background: linear-gradient(45deg, var(--accent-green), var(--dark-green));
-            border-color: var(--white);
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
 
         .stats {
@@ -266,19 +221,17 @@
 
         .stat-item {
             text-align: center;
-            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            background: rgba(255, 255, 255, 0.1);
             padding: 15px;
             border-radius: 10px;
             min-width: 120px;
             margin: 5px;
-            border: 2px solid var(--accent-green);
         }
 
         .stat-value {
             font-size: 2em;
             font-weight: bold;
-            color: var(--accent-green);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            color: #4ecdc4;
         }
 
         .complexity-table {
@@ -288,28 +241,22 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             overflow: hidden;
-            border: 2px solid var(--accent-green);
         }
 
         .complexity-table th,
         .complexity-table td {
             padding: 15px;
             text-align: center;
-            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .complexity-table th {
-            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            background: rgba(255, 255, 255, 0.2);
             font-weight: bold;
-            color: var(--white);
         }
 
         .complexity-table tr:hover {
-            background: rgba(16, 185, 129, 0.1);
-        }
-
-        .complexity-table tr:nth-child(even) {
-            background: rgba(30, 58, 138, 0.1);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .input-section {
@@ -318,54 +265,38 @@
 
         .input-section input {
             padding: 10px;
-            border: 2px solid var(--accent-green);
+            border: none;
             border-radius: 5px;
             margin: 5px;
             font-size: 1em;
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .input-section input:focus {
-            outline: none;
-            border-color: var(--secondary-blue);
-            box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
         }
 
         .input-section select {
             padding: 10px;
-            border: 2px solid var(--accent-green);
+            border: none;
             border-radius: 5px;
             margin: 5px;
             font-size: 1em;
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .input-section select:focus {
-            outline: none;
-            border-color: var(--secondary-blue);
-            box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
         }
 
         .performance-chart {
             margin: 20px 0;
             height: 300px;
-            background: linear-gradient(135deg, var(--dark-gray), var(--primary-blue));
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.2em;
-            border: 2px solid var(--accent-green);
         }
 
         .code-block {
-            background: linear-gradient(135deg, var(--dark-gray), #111827);
+            background: rgba(0, 0, 0, 0.5);
             padding: 20px;
             border-radius: 10px;
             margin: 20px 0;
             font-family: 'Courier New', monospace;
             overflow-x: auto;
-            border: 2px solid var(--accent-green);
         }
 
         .code-block pre {
@@ -374,10 +305,9 @@
         }
 
         .highlight {
-            background: linear-gradient(45deg, var(--accent-green), var(--dark-green));
+            background: rgba(255, 255, 0, 0.3);
             padding: 2px 4px;
             border-radius: 3px;
-            color: white;
         }
 
         .footer {
@@ -385,29 +315,6 @@
             padding: 40px 0;
             margin-top: 50px;
             opacity: 0.8;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            border: 2px solid rgba(16, 185, 129, 0.2);
-        }
-
-        /* Estilo especial para destacar o Quicksort */
-        .quicksort-highlight {
-            background: linear-gradient(45deg, var(--accent-green), var(--dark-green)) !important;
-            color: white !important;
-        }
-
-        /* Animação especial para elementos importantes */
-        .icet-glow {
-            animation: icetGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes icetGlow {
-            from {
-                box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
-            }
-            to {
-                box-shadow: 0 0 30px rgba(59, 130, 246, 0.7);
-            }
         }
 
         @media (max-width: 768px) {
@@ -442,7 +349,6 @@
         <header class="header">
             <h1>🚀 Seminário Quicksort</h1>
             <p>Algoritmos e Estruturas de Dados I - Sistemas de Informação</p>
-            <p><strong>ICET - UFAM</strong></p>
             <p>Data: 16/07/2025</p>
             <div class="team-info">
                 <div class="team-member">
@@ -652,7 +558,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="quicksort-highlight">
+                    <tr style="background: rgba(76, 175, 80, 0.2);">
                         <td><strong>Quicksort</strong></td>
                         <td>O(n log n)</td>
                         <td>O(n log n)</td>
@@ -720,19 +626,19 @@
                 <p>O Quicksort é um dos algoritmos mais importantes e utilizados na computação moderna.</p>
                 
                 <div class="stats">
-                    <div class="stat-item icet-glow">
+                    <div class="stat-item">
                         <div class="stat-value">⭐</div>
                         <div>Eficiente na Prática</div>
                     </div>
-                    <div class="stat-item icet-glow">
+                    <div class="stat-item">
                         <div class="stat-value">💾</div>
                         <div>Economiza Memória</div>
                     </div>
-                    <div class="stat-item icet-glow">
+                    <div class="stat-item">
                         <div class="stat-value">🏭</div>
                         <div>Usado na Indústria</div>
                     </div>
-                    <div class="stat-item icet-glow">
+                    <div class="stat-item">
                         <div class="stat-value">🎯</div>
                         <div>Fácil de Implementar</div>
                     </div>
@@ -755,7 +661,6 @@
 
         <footer class="footer">
             <p>🎉 Obrigado pela atenção! Seminário Quicksort - Algoritmos e Estruturas de Dados I</p>
-            <p><strong>ICET - UFAM - Sistemas de Informação</strong></p>
             <p>Equipe: Kaio Sobral, Gustavo Souza, Felipe Rangel</p>
         </footer>
     </div>
@@ -764,3 +669,142 @@
         // Variáveis globais
         let currentArray = [];
         let originalArray = [];
+        let demoStep = 0;
+        let isRunning = false;
+        let stats = { comparisons: 0, swaps: 0, steps: 0 };
+
+        // Função para mostrar seções
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Gerar array personalizado
+        function generateArray() {
+            const size = parseInt(document.getElementById('arraySize').value) || 8;
+            const type = document.getElementById('arrayType').value;
+            
+            currentArray = [];
+            
+            switch(type) {
+                case 'random':
+                    for(let i = 0; i < size; i++) {
+                        currentArray.push(Math.floor(Math.random() * 100) + 1);
+                    }
+                    break;
+                case 'sorted':
+                    for(let i = 0; i < size; i++) {
+                        currentArray.push(i + 1);
+                    }
+                    break;
+                case 'reverse':
+                    for(let i = size; i > 0; i--) {
+                        currentArray.push(i);
+                    }
+                    break;
+                case 'custom':
+                    const customInput = prompt('Digite os números separados por vírgula:');
+                    if(customInput) {
+                        currentArray = customInput.split(',').map(n => parseInt(n.trim())).filter(n => !isNaN(n));
+                    }
+                    break;
+            }
+            
+            originalArray = [...currentArray];
+            displayArray('arrayContainer', currentArray);
+            displayArray('demoArray', currentArray);
+        }
+
+        // Exibir array na tela
+        function displayArray(containerId, array, highlights = {}) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            array.forEach((value, index) => {
+                const element = document.createElement('div');
+                element.className = 'array-element';
+                element.textContent = value;
+                
+                if(highlights.pivot === index) {
+                    element.classList.add('pivot');
+                }
+                if(highlights.comparing && highlights.comparing.includes(index)) {
+                    element.classList.add('comparing');
+                }
+                if(highlights.sorted && highlights.sorted.includes(index)) {
+                    element.classList.add('sorted');
+                }
+                
+                container.appendChild(element);
+            });
+        }
+
+        // Inicializar com array padrão
+        function init() {
+            currentArray = [64, 34, 25, 12, 22, 11, 90];
+            originalArray = [...currentArray];
+            displayArray('arrayContainer', currentArray);
+            displayArray('demoArray', currentArray);
+        }
+
+        // Quicksort com visualização
+        function quicksortVisualization(arr, low, high, callback) {
+            if(low < high) {
+                const pi = partitionVisualization(arr, low, high, callback);
+                quicksortVisualization(arr, low, pi - 1, callback);
+                quicksortVisualization(arr, pi + 1, high, callback);
+            }
+        }
+
+        function partitionVisualization(arr, low, high, callback) {
+            const pivot = arr[high];
+            let i = low - 1;
+            
+            for(let j = low; j < high; j++) {
+                stats.comparisons++;
+                callback({
+                    type: 'compare',
+                    comparing: [j, high],
+                    pivot: high,
+                    message: `Comparando ${arr[j]} com pivô ${pivot}`
+                });
+                
+                if(arr[j] <= pivot) {
+                    i++;
+                    if(i !== j) {
+                        [arr[i], arr[j]] = [arr[j], arr[i]];
+                        stats.swaps++;
+                        callback({
+                            type: 'swap',
+                            swapped: [i, j],
+                            message: `Trocando ${arr[j]} com ${arr[i]}`
+                        });
+                    }
+                }
+            }
+            
+            [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+            stats.swaps++;
+            callback({
+                type: 'pivot_place',
+                swapped: [i + 1, high],
+                message: `Colocando pivô ${pivot} na posição final`
+            });
+            
+            return i + 1;
+        }
+
+        // Iniciar demonstração do Quicksort
+        function startQuicksort() {
+            if(isRunning) return;
+            
+            isRunning = true;
+            stats = { comparisons: 0, swaps: 0, steps: 0 };
+            currentArray = [...originalArray];
