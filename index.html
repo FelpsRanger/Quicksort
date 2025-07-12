@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Seminário Quicksort - Demonstração Interativa</title>
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --accent-green: #10b981;
+            --dark-green: #059669;
+            --light-blue: #60a5fa;
+            --white: #ffffff;
+            --light-gray: #f3f4f6;
+            --dark-gray: #1f2937;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 50%, var(--accent-green) 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, var(--white), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            color: var(--light-gray);
+        }
+
+        .team-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .team-member {
+            background: linear-gradient(135deg, var(--accent-green), var(--dark-green));
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 15px 25px;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            backdrop-filter: blur(5px);
+            border: 2px solid transparent;
+        }
+
+        .nav-tab:hover {
+            background: linear-gradient(135deg, var(--accent-green), var(--dark-green));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, var(--accent-green), var(--dark-green));
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+            border-color: var(--white);
+        }
+
+        .content-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .visualization-container {
+            background: linear-gradient(135deg, var(--dark-gray), var(--primary-blue));
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 200px;
+            border: 2px solid var(--accent-green);
+        }
+
+        .array-container {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .array-element {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--secondary-blue), var(--primary-blue));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .array-element:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.5);
+            border-color: var(--accent-green);
+        }
+
+        .array-element.pivot {
+            background: linear-gradient(45deg, var(--accent-green), var(--dark-green));
+            animation: pulse 1s infinite;
+            border-color: var(--white);
+        }
+
+        .array-element.comparing {
+            background: linear-gradient(45deg, #f59e0b, #d97706);
+            animation: shake 0.5s ease-in-out;
+            border-color: var(--white);
+        }
+
+        .array-element.sorted {
+            background: linear-gradient(45deg, var(--accent-green), var(--dark-green));
+            border-color: var(--white);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--secondary-blue), var(--primary-blue));
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, var(--primary-blue), var(--dark-gray));
+            border-color: var(--accent-green);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, var(--accent-green), var(--dark-green));
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(45deg, var(--dark-green), var(--primary-blue));
+            border-color: var(--white);
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, var(--light-blue), var(--secondary-blue));
+        }
+
+        .btn-success:hover {
+            background: linear-gradient(45deg, var(--accent-green), var(--dark-green));
+            border-color: var(--white);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 120px;
+            margin: 5px;
+            border: 2px solid var(--accent-green);
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--accent-green);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .complexity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid var(--accent-green);
+        }
+
+        .complexity-table th,
+        .complexity-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .complexity-table th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            font-weight: bold;
+            color: var(--white);
+        }
+
+        .complexity-table tr:hover {
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .complexity-table tr:nth-child(even) {
+            background: rgba(30, 58, 138, 0.1);
+        }
+
+        .input-section {
+            margin: 20px 0;
+        }
+
+        .input-section input {
+            padding: 10px;
+            border: 2px solid var(--accent-green);
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 1em;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .input-section input:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+        }
+
+        .input-section select {
+            padding: 10px;
+            border: 2px solid var(--accent-green);
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 1em;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .input-section select:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+        }
+
+        .performance-chart {
+            margin: 20px 0;
+            height: 300px;
+            background: linear-gradient(135deg, var(--dark-gray), var(--primary-blue));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            border: 2px solid var(--accent-green);
+        }
+
+        .code-block {
+            background: linear-gradient(135deg, var(--dark-gray), #111827);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            border: 2px solid var(--accent-green);
+        }
+
+        .code-block pre {
+            color: #f8f8f2;
+            line-height: 1.5;
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, var(--accent-green), var(--dark-green));
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 50px;
+            opacity: 0.8;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            border: 2px solid rgba(16, 185, 129, 0.2);
+        }
+
+        /* Estilo especial para destacar o Quicksort */
+        .quicksort-highlight {
+            background: linear-gradient(45deg, var(--accent-green), var(--dark-green)) !important;
+            color: white !important;
+        }
+
+        /* Animação especial para elementos importantes */
+        .icet-glow {
+            animation: icetGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes icetGlow {
+            from {
+                box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+            }
+            to {
+                box-shadow: 0 0 30px rgba(59, 130, 246, 0.7);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .team-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-tab {
+                width: 200px;
+            }
+            
+            .array-element {
+                width: 50px;
+                height: 50px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🚀 Seminário Quicksort</h1>
+            <p>Algoritmos e Estruturas de Dados I - Sistemas de Informação</p>
+            <p><strong>ICET - UFAM</strong></p>
+            <p>Data: 16/07/2025</p>
+            <div class="team-info">
+                <div class="team-member">
+                    <strong>Kaio Sobral</strong><br>
+                    <small>Fundamentos e Teoria</small>
+                </div>
+                <div class="team-member">
+                    <strong>Gustavo Souza</strong><br>
+                    <small>Implementação e Análise</small>
+                </div>
+                <div class="team-member">
+                    <strong>Felipe Rangel</strong><br>
+                    <small>Testes e Conclusões</small>
+                </div>
+            </div>
+        </header>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('intro')">📚 Introdução</button>
+            <button class="nav-tab" onclick="showSection('demo')">🎯 Demonstração</button>
+            <button class="nav-tab" onclick="showSection('implementation')">💻 Implementação</button>
+            <button class="nav-tab" onclick="showSection('analysis')">📊 Análise</button>
+            <button class="nav-tab" onclick="showSection('comparison')">⚡ Comparação</button>
+            <button class="nav-tab" onclick="showSection('conclusion')">🎓 Conclusão</button>
+        </nav>
+
+        <section id="intro" class="content-section active">
+            <h2>📚 Introdução ao Quicksort</h2>
+            <p><strong>Criado por:</strong> Tony Hoare em 1960</p>
+            <p><strong>Princípio:</strong> Dividir para conquistar</p>
+            <p><strong>Aplicações:</strong> Ordenação eficiente de grandes volumes de dados</p>
+            
+            <div class="visualization-container">
+                <h3>🎯 Conceito Principal</h3>
+                <p>O Quicksort é como dividir uma pizza gigante em fatias menores até ficar fácil de comer!</p>
+                <p>🔹 Escolhe um elemento como "pivô"</p>
+                <p>🔹 Reorganiza o array: elementos menores à esquerda, maiores à direita</p>
+                <p>🔹 Aplica recursivamente aos sub-arrays</p>
+            </div>
+
+            <div class="input-section">
+                <h3>🎲 Gerar Array Personalizado</h3>
+                <input type="number" id="arraySize" placeholder="Tamanho (5-20)" min="5" max="20" value="8">
+                <select id="arrayType">
+                    <option value="random">Aleatório</option>
+                    <option value="sorted">Ordenado</option>
+                    <option value="reverse">Reverso</option>
+                    <option value="custom">Personalizado</option>
+                </select>
+                <button class="btn btn-primary" onclick="generateArray()">Gerar Array</button>
+            </div>
+
+            <div class="array-container" id="arrayContainer">
+                <!-- Array será gerado aqui -->
+            </div>
+        </section>
+
+        <section id="demo" class="content-section">
+            <h2>🎯 Demonstração Interativa</h2>
+            
+            <div class="controls">
+                <button class="btn btn-primary" onclick="startQuicksort()">🚀 Iniciar Quicksort</button>
+                <button class="btn btn-secondary" onclick="stepForward()">👆 Próximo Passo</button>
+                <button class="btn btn-success" onclick="resetDemo()">🔄 Resetar</button>
+            </div>
+
+            <div class="visualization-container">
+                <h3>📊 Visualização do Algoritmo</h3>
+                <div class="array-container" id="demoArray">
+                    <!-- Array de demonstração -->
+                </div>
+                <div id="stepDescription" style="text-align: center; margin-top: 20px; font-size: 1.2em;">
+                    Clique em "Iniciar Quicksort" para começar a demonstração
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="comparisons">0</div>
+                    <div>Comparações</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="swaps">0</div>
+                    <div>Trocas</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="steps">0</div>
+                    <div>Passos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="recursionDepth">0</div>
+                    <div>Profundidade</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="implementation" class="content-section">
+            <h2>💻 Implementação do Quicksort</h2>
+            
+            <div class="code-block">
+                <h3>🔧 Código Principal</h3>
+                <pre>
+<span class="highlight">void quicksort(int arr[], int baixo, int alto) {</span>
+    if (baixo < alto) {
+        // Particiona o array e obtém o índice do pivô
+        int pi = particionar(arr, baixo, alto);
+        
+        // Ordena recursivamente os elementos antes e depois do pivô
+        quicksort(arr, baixo, pi - 1);
+        quicksort(arr, pi + 1, alto);
+    }
+}
+
+<span class="highlight">int particionar(int arr[], int baixo, int alto) {</span>
+    int pivo = arr[alto];    // Escolhe o último elemento como pivô
+    int i = (baixo - 1);     // Índice do menor elemento
+    
+    for (int j = baixo; j <= alto - 1; j++) {
+        if (arr[j] <= pivo) {
+            i++;
+            trocar(&arr[i], &arr[j]);
+        }
+    }
+    trocar(&arr[i + 1], &arr[alto]);
+    return (i + 1);
+}
+                </pre>
+            </div>
+
+            <div class="controls">
+                <button class="btn btn-primary" onclick="highlightCode('partition')">🎯 Destacar Partição</button>
+                <button class="btn btn-secondary" onclick="highlightCode('recursion')">🔄 Destacar Recursão</button>
+                <button class="btn btn-success" onclick="highlightCode('swap')">🔀 Destacar Troca</button>
+            </div>
+        </section>
+
+        <section id="analysis" class="content-section">
+            <h2>📊 Análise de Complexidade</h2>
+            
+            <table class="complexity-table">
+                <thead>
+                    <tr>
+                        <th>Cenário</th>
+                        <th>Complexidade</th>
+                        <th>Descrição</th>
+                        <th>Exemplo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🟢 Melhor Caso</td>
+                        <td><strong>O(n log n)</strong></td>
+                        <td>Pivô sempre divide pela metade</td>
+                        <td>Array com elementos bem distribuídos</td>
+                    </tr>
+                    <tr>
+                        <td>🟡 Caso Médio</td>
+                        <td><strong>O(n log n)</strong></td>
+                        <td>Comportamento típico</td>
+                        <td>Array com elementos aleatórios</td>
+                    </tr>
+                    <tr>
+                        <td>🔴 Pior Caso</td>
+                        <td><strong>O(n²)</strong></td>
+                        <td>Pivô sempre é o maior/menor</td>
+                        <td>Array já ordenado</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="performance-chart">
+                <div>
+                    <h3>📈 Gráfico de Performance</h3>
+                    <p>Clique no botão abaixo para executar testes de performance</p>
+                    <button class="btn btn-primary" onclick="runPerformanceTest()">🚀 Executar Testes</button>
+                </div>
+            </div>
+
+            <div class="stats" id="performanceStats" style="display: none;">
+                <div class="stat-item">
+                    <div class="stat-value" id="testTime">0ms</div>
+                    <div>Tempo de Execução</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="testComparisons">0</div>
+                    <div>Comparações</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="testSwaps">0</div>
+                    <div>Trocas</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison" class="content-section">
+            <h2>⚡ Comparação com Outros Algoritmos</h2>
+            
+            <table class="complexity-table">
+                <thead>
+                    <tr>
+                        <th>Algoritmo</th>
+                        <th>Melhor Caso</th>
+                        <th>Caso Médio</th>
+                        <th>Pior Caso</th>
+                        <th>Estável</th>
+                        <th>In-place</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="quicksort-highlight">
+                        <td><strong>Quicksort</strong></td>
+                        <td>O(n log n)</td>
+                        <td>O(n log n)</td>
+                        <td>O(n²)</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td>Merge Sort</td>
+                        <td>O(n log n)</td>
+                        <td>O(n log n)</td>
+                        <td>O(n log n)</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td>Heap Sort</td>
+                        <td>O(n log n)</td>
+                        <td>O(n log n)</td>
+                        <td>O(n log n)</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td>Bubble Sort</td>
+                        <td>O(n)</td>
+                        <td>O(n²)</td>
+                        <td>O(n²)</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="controls">
+                <button class="btn btn-primary" onclick="compareAlgorithms()">📊 Comparar Performance</button>
+                <button class="btn btn-secondary" onclick="showAdvantages()">✅ Vantagens</button>
+                <button class="btn btn-success" onclick="showDisadvantages()">❌ Desvantagens</button>
+            </div>
+
+            <div class="visualization-container" id="comparisonResults">
+                <h3>🎯 Quando Usar Quicksort?</h3>
+                <p><strong>✅ Use quando:</strong></p>
+                <ul>
+                    <li>Dados são aleatórios ou semi-aleatórios</li>
+                    <li>Memória é limitada (ordena in-place)</li>
+                    <li>Performance média é mais importante que garantias</li>
+                    <li>Implementação simples é desejada</li>
+                </ul>
+                <p><strong>❌ Evite quando:</strong></p>
+                <ul>
+                    <li>Dados já estão ordenados (sem otimização)</li>
+                    <li>Estabilidade é crucial</li>
+                    <li>Sistema não pode ter O(n²)</li>
+                    <li>Arrays extremamente grandes (stack overflow)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="conclusion" class="content-section">
+            <h2>🎓 Conclusão</h2>
+            
+            <div class="visualization-container">
+                <h3>🚀 Resumo do Quicksort</h3>
+                <p>O Quicksort é um dos algoritmos mais importantes e utilizados na computação moderna.</p>
+                
+                <div class="stats">
+                    <div class="stat-item icet-glow">
+                        <div class="stat-value">⭐</div>
+                        <div>Eficiente na Prática</div>
+                    </div>
+                    <div class="stat-item icet-glow">
+                        <div class="stat-value">💾</div>
+                        <div>Economiza Memória</div>
+                    </div>
+                    <div class="stat-item icet-glow">
+                        <div class="stat-value">🏭</div>
+                        <div>Usado na Indústria</div>
+                    </div>
+                    <div class="stat-item icet-glow">
+                        <div class="stat-value">🎯</div>
+                        <div>Fácil de Implementar</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="visualization-container">
+                <h3>📚 Principais Aprendizados</h3>
+                <p>1. <strong>Divide e Conquista:</strong> Estratégia fundamental para resolver problemas complexos</p>
+                <p>2. <strong>Análise de Complexidade:</strong> Importância de entender diferentes cenários</p>
+                <p>3. <strong>Trade-offs:</strong> Balanceamento entre eficiência e garantias</p>
+                <p>4. <strong>Aplicação Prática:</strong> Conhecimento aplicável em projetos reais</p>
+            </div>
+
+            <div class="controls">
+                <button class="btn btn-primary" onclick="showFinalDemo()">🎬 Demonstração Final</button>
+                <button class="btn btn-secondary" onclick="generateCertificate()">📜 Gerar Certificado</button>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>🎉 Obrigado pela atenção! Seminário Quicksort - Algoritmos e Estruturas de Dados I</p>
+            <p><strong>ICET - UFAM - Sistemas de Informação</strong></p>
+            <p>Equipe: Kaio Sobral, Gustavo Souza, Felipe Rangel</p>
+        </footer>
+    </div>
+
+    <script>
+        // Variáveis globais
+        let currentArray = [];
+        let originalArray = [];
