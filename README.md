@@ -15,7 +15,7 @@
 ---
 
 ## 🎯 Objetivo
-Apresentar e analisar profundamente o algoritmo Quicksort de forma teórica, prática e comparativa, utilizando criatividade e clareza na apresentação.
+Apresentar e analisar profundamente o algoritmo Quicksort de forma teórica, prática e comparativa, utilizando criatividade e clareza na apresentação através de implementação em linguagem C.
 
 ---
 
@@ -31,12 +31,12 @@ Apresentar e analisar profundamente o algoritmo Quicksort de forma teórica, pr�
 - Explicação do algoritmo de divisão e conquista
 - Conceito de particionamento e pivô
 - Exemplo numérico detalhado
-- Ilustração visual do processo
+- Demonstração interativa em tempo real
 
 ### 3. **Implementação** (Gustavo Souza)
-- Código funcional do Quicksort
+- Código funcional do Quicksort em C
 - Explicação dos principais trechos
-- Demonstração ao vivo
+- Demonstração ao vivo no terminal
 - Variações do algoritmo
 
 ### 4. **Análise de Complexidade** (Gustavo Souza)
@@ -46,12 +46,12 @@ Apresentar e analisar profundamente o algoritmo Quicksort de forma teórica, pr�
 - Comparação com outros algoritmos
 
 ### 5. **Testes Práticos** (Felipe Rangel)
-- Testes com diferentes tamanhos de listas
+- Testes com diferentes tamanhos de arrays
 - Diferentes padrões de dados:
-  - Listas aleatórias
-  - Listas ordenadas
-  - Listas em ordem reversa
-  - Listas com duplicatas
+  - Arrays aleatórios
+  - Arrays ordenados
+  - Arrays em ordem reversa
+  - Arrays com duplicatas
 - Interpretação dos resultados
 
 ### 6. **Considerações Finais** (Felipe Rangel)
@@ -61,28 +61,34 @@ Apresentar e analisar profundamente o algoritmo Quicksort de forma teórica, pr�
 
 ### 7. **Extra - Comparações** (Felipe Rangel)
 - Quicksort vs Mergesort
-- Quicksort vs Heapsort
+- Quicksort vs Bubble Sort
 - Tabela comparativa de algoritmos
 
 ---
 
 ## 🛠️ Recursos Técnicos
 
-### **Códigos Implementados:**
-1. **`quicksort_tests.py`** - Testes práticos com diferentes cenários
-2. **`quicksort_comparacao.py`** - Comparação com outros algoritmos
-3. **Implementação base do Quicksort** - Código funcional demonstrativo
+### **Código Implementado:**
+1. **`quicksort_seminar.c`** - Programa completo com todas as funcionalidades
+   - Implementação do Quicksort
+   - Algoritmos de comparação (Merge Sort, Bubble Sort)
+   - Testes de performance
+   - Menu interativo
+   - Análise de complexidade
 
-### **Dependências:**
-```bash
-pip install matplotlib numpy
-```
+### **Funcionalidades do Programa:**
+- Demonstração passo a passo
+- Testes automáticos de performance
+- Geração de diferentes tipos de dados
+- Contagem de operações (comparações e trocas)
+- Medição de tempo de execução
+- Interface de usuário intuitiva
 
-### **Ferramentas Utilizadas:**
+### **Compilador e Ferramentas:**
+- **Compilador:** GCC (GNU Compiler Collection)
+- **Linguagem:** C (padrão C99)
+- **Bibliotecas:** stdio.h, stdlib.h, time.h, string.h
 - **Visualização:** [VisuAlgo](https://visualgo.net/en/sorting)
-- **Análise de código:** Python Tutor
-- **Gráficos:** Matplotlib
-- **Documentação:** Markdown
 
 ---
 
@@ -92,16 +98,17 @@ pip install matplotlib numpy
 - Demonstração da eficiência O(n log n) em casos médios
 - Identificação de cenários problemáticos O(n²)
 - Comparação quantitativa com outros algoritmos
+- Medição precisa de tempo de execução
 
 ### **Casos de Teste:**
-- **Listas pequenas:** 100-500 elementos
-- **Listas médias:** 1000-2000 elementos  
-- **Listas grandes:** 5000+ elementos
+- **Arrays pequenos:** 100-500 elementos
+- **Arrays médios:** 1000-2000 elementos  
+- **Arrays grandes:** 5000+ elementos
 
 ### **Métricas Avaliadas:**
-- Tempo de execução
-- Uso de memória
-- Estabilidade do algoritmo
+- Tempo de execução (em segundos)
+- Número de comparações
+- Número de trocas
 - Comportamento com diferentes tipos de dados
 
 ---
@@ -130,7 +137,7 @@ pip install matplotlib numpy
 - Dados já ordenados (sem otimização)
 - Quando estabilidade é crucial
 - Sistemas que não podem ter O(n²)
-- Listas extremamente grandes (stack overflow)
+- Arrays extremamente grandes (stack overflow)
 
 ---
 
@@ -155,11 +162,13 @@ pip install matplotlib numpy
 - Demonstração manual com voluntários
 - Quiz sobre performance
 - Escolha do pivô pelo público
+- Execução ao vivo do programa
 
 ### **Recursos Visuais:**
-- Gráficos de performance
-- Animações do algoritmo
-- Exemplos práticos com cartas/papéis
+- Resultados de performance em tempo real
+- Contadores de operações
+- Comparações side-by-side
+- Exemplos práticos com dados reais
 
 ---
 
@@ -168,26 +177,107 @@ pip install matplotlib numpy
 - **Livro:** "Algoritmos: Teoria e Prática" - Cormen, Leiserson, Rivest, Stein
 - **Site:** GeeksforGeeks - Quicksort
 - **Visualização:** VisuAlgo.net
-- **Documentação:** Python Official Documentation
+- **Documentação:** GCC Documentation
 - **Artigo Original:** Tony Hoare - "Quicksort" (1961)
 
 ---
 
-## 🚀 Como Executar os Testes
+## 🚀 Como Compilar e Executar
 
-1. **Clone ou baixe os arquivos**
-2. **Instale as dependências:**
+### **Pré-requisitos:**
+- Compilador GCC instalado
+- Sistema operacional: Linux, macOS ou Windows (com MinGW)
+
+### **Passos:**
+1. **Clone ou baixe o arquivo**
    ```bash
-   pip install matplotlib numpy
+   # Baixe o arquivo quicksort_seminar.c
    ```
-3. **Execute os testes:**
+
+2. **Compile o programa:**
    ```bash
-   python quicksort_tests.py
+   gcc -o quicksort_seminar quicksort_seminar.c
    ```
-4. **Execute as comparações:**
+
+3. **Execute o programa:**
    ```bash
-   python quicksort_comparacao.py
+   ./quicksort_seminar
    ```
+
+4. **No Windows:**
+   ```bash
+   quicksort_seminar.exe
+   ```
+
+### **Menu Interativo:**
+- **Opção 1:** Demonstração passo a passo
+- **Opção 2:** Testes de performance
+- **Opção 3:** Análise de complexidade
+- **Opção 4:** Tabela comparativa
+- **Opção 5:** Executar todos os testes
+
+---
+
+## 🎯 Exemplo de Uso
+
+```bash
+# Compilar
+gcc -o quicksort_seminar quicksort_seminar.c
+
+# Executar
+./quicksort_seminar
+
+# Saída esperada:
+🚀 SEMINÁRIO FINAL: QUICKSORT
+==============================
+Algoritmos e Estruturas de Dados I - Sistemas de Informação
+Data: 16/07/2025
+Equipe: Kaio Sobral, Gustavo Souza, Felipe Rangel
+
+🚀 SEMINÁRIO QUICKSORT - MENU PRINCIPAL
+=======================================
+1. Demonstração Passo a Passo
+2. Testes de Performance
+3. Análise de Complexidade
+4. Tabela Comparativa
+5. Executar Todos os Testes
+0. Sair
+
+Escolha uma opção:
+```
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+seminario-quicksort/
+├── quicksort_seminar.c    # Código principal
+├── README.md              # Este arquivo
+└── Makefile              # (opcional) Para automação
+```
+
+---
+
+## 🔧 Makefile (Opcional)
+
+```makefile
+CC = gcc
+CFLAGS = -Wall -Wextra -std=c99
+TARGET = quicksort_seminar
+SOURCE = quicksort_seminar.c
+
+$(TARGET): $(SOURCE)
+	$(CC) $(CFLAGS) -o $(TARGET) $(SOURCE)
+
+clean:
+	rm -f $(TARGET)
+
+run: $(TARGET)
+	./$(TARGET)
+
+.PHONY: clean run
+```
 
 ---
 
@@ -195,5 +285,25 @@ pip install matplotlib numpy
 
 O Quicksort representa um dos algoritmos mais importantes e utilizados na computação moderna. Sua eficiência prática, simplicidade de implementação e versatilidade o tornam uma escolha excelente para a maioria dos problemas de ordenação. 
 
-Através desta apresentação, demonstramos tanto suas qualidades quanto suas limitações, fornecendo uma visão completa e prática deste algoritmo fundamental.
+Através desta implementação em C, demonstramos tanto suas qualidades quanto suas limitações, fornecendo uma visão completa e prática deste algoritmo fundamental com medições precisas de performance e análise detalhada de comportamento.
 
+---
+
+## 🤝 Contribuições
+
+Este projeto foi desenvolvido para fins educacionais como parte do seminário final da disciplina Algoritmos e Estruturas de Dados I. 
+
+**Equipe:**
+- Kaio Sobral - Teoria e Fundamentos
+- Gustavo Souza - Implementação e Análise  
+- Felipe Rangel - Testes e Conclusões
+
+---
+
+## 📄 Licença
+
+Este projeto é de uso educacional e está disponível sob a licença MIT.
+
+---
+
+**Boa sorte na apresentação! 🎉**
