@@ -3,39 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <title>Quiz Criativo - Quicksort</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    :root {
+      --bg: #ffffff;
+      --text: #222;
+      --card: #f9f9f9;
+      --accent: #4CAF50;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121212;
+        --text: #eee;
+        --card: #1e1e1e;
+        --accent: #4CAF50;
+      }
+    }
+
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      background: var(--bg);
+      color: var(--text);
       padding: 20px;
+      margin: 0;
     }
+
     .quiz-container {
-      background: #fff;
+      background: var(--card);
       padding: 20px;
       border-radius: 10px;
       max-width: 700px;
       margin: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
-    h2 { color: #333; }
+
+    h2 {
+      text-align: center;
+    }
+
     .question {
       margin-bottom: 20px;
     }
+
     button {
-      background-color: #4CAF50;
+      background-color: var(--accent);
       color: white;
       padding: 10px 20px;
       border: none;
       cursor: pointer;
       border-radius: 5px;
+      width: 100%;
+      font-size: 16px;
     }
+
     button:hover {
-      background-color: #45a049;
+      opacity: 0.9;
     }
+
     .result {
       font-weight: bold;
       margin-top: 20px;
       font-size: 18px;
+      text-align: center;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    .ranking {
+      margin-top: 30px;
+      background-color: rgba(0, 0, 0, 0.05);
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .ranking h3 {
+      margin-top: 0;
     }
   </style>
 </head>
@@ -45,9 +96,12 @@
   <h2>🎯 Quiz Criativo: Quem é você no Quicksort?</h2>
 
   <form id="quizForm">
+    <label for="nome"><strong>Seu nome:</strong></label>
+    <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+
     <div class="question">
       <p><strong>1. O que seria o pivô numa festa?</strong></p>
-      <label><input type="radio" name="q1" value="b"> A pessoa que organiza tudo e decide onde cada um vai sentar</label><br>
+      <label><input type="radio" name="q1" value="b"> A pessoa que organiza tudo</label><br>
       <label><input type="radio" name="q1" value="a"> O primeiro a ir embora</label><br>
       <label><input type="radio" name="q1" value="c"> Quem chega atrasado</label><br>
       <label><input type="radio" name="q1" value="d"> O DJ</label>
@@ -56,14 +110,14 @@
     <div class="question">
       <p><strong>2. O Quicksort é como arrumar uma estante de livros...</strong></p>
       <label><input type="radio" name="q2" value="b"> Separando um livro base e organizando os demais à esquerda e à direita</label><br>
-      <label><input type="radio" name="q2" value="a"> Jogando todos no chão e escolhendo os que você gosta</label><br>
-      <label><input type="radio" name="q2" value="c"> Lendo todos antes de organizá-los</label><br>
-      <label><input type="radio" name="q2" value="d"> Só colocando os livros maiores no topo</label>
+      <label><input type="radio" name="q2" value="a"> Jogando todos no chão</label><br>
+      <label><input type="radio" name="q2" value="c"> Lendo todos antes</label><br>
+      <label><input type="radio" name="q2" value="d"> Só colocando os maiores no topo</label>
     </div>
 
     <div class="question">
       <p><strong>3. Se o Quicksort fosse um reality show, o pivô...</strong></p>
-      <label><input type="radio" name="q3" value="b"> Dividiria os participantes em dois grupos: os que ele gosta e os que não gosta</label><br>
+      <label><input type="radio" name="q3" value="b"> Dividiria os participantes</label><br>
       <label><input type="radio" name="q3" value="a"> Eliminaria os menos populares</label><br>
       <label><input type="radio" name="q3" value="c"> Faria todos votarem</label><br>
       <label><input type="radio" name="q3" value="d"> Sumiria e deixaria o caos</label>
@@ -79,7 +133,67 @@
 
     <div class="question">
       <p><strong>5. Se o Quicksort fosse uma banda, seria...</strong></p>
-      <label><input type="radio" name="q5" value="b"> Metallica — rápido, eficiente, um clássico</label><br>
-      <label><input type="radio" name="q5" value="a"> Coldplay — bonitinho, mas previsível</label><br>
-      <label><input type="radio" name="q5" value="c"> Beatles — bom, mas meio antigo</label><br>
-      <label><input type="radio" name="q5" value="d"> Mamonas Assassinas — rápido, mas c
+      <label><input type="radio" name="q5" value="b"> Metallica — rápido e eficiente</label><br>
+      <label><input type="radio" name="q5" value="a"> Coldplay — previsível</label><br>
+      <label><input type="radio" name="q5" value="c"> Beatles — bom, mas antigo</label><br>
+      <label><input type="radio" name="q5" value="d"> Mamonas Assassinas — rápido, mas caótico</label>
+    </div>
+
+    <button type="button" onclick="verificarRespostas()">Enviar</button>
+  </form>
+
+  <div class="result" id="resultado"></div>
+
+  <div class="ranking" id="rankingBox" style="display:none;">
+    <h3>🏆 Ranking (local)</h3>
+    <ul id="ranking"></ul>
+  </div>
+</div>
+
+<script>
+function verificarRespostas() {
+  const respostas = { q1: 'b', q2: 'b', q3: 'b', q4: 'c', q5: 'b' };
+  let acertos = 0;
+
+  for (let i = 1; i <= 5; i++) {
+    const marcada = document.querySelector(`input[name="q${i}"]:checked`);
+    if (marcada && marcada.value === respostas[`q${i}`]) acertos++;
+  }
+
+  const nome = document.getElementById("nome").value.trim();
+  if (!nome) {
+    alert("Por favor, digite seu nome.");
+    return;
+  }
+
+  const mensagem =
+    acertos === 5 ? "Você é um verdadeiro mestre do Quicksort!" :
+    acertos >= 3 ? "Mandou bem! Tá quase um pivô profissional." :
+    "Ainda tá trocando muita posição... precisa ordenar melhor os conceitos 😉";
+
+  document.getElementById("resultado").innerHTML = `✨ ${nome}, você acertou <strong>${acertos}</strong> de 5!<br>${mensagem}`;
+
+  salvarRanking(nome, acertos);
+  mostrarRanking();
+}
+
+function salvarRanking(nome, acertos) {
+  const ranking = JSON.parse(localStorage.getItem("rankingQuicksort") || "[]");
+  ranking.push({ nome, acertos });
+  ranking.sort((a, b) => b.acertos - a.acertos);
+  localStorage.setItem("rankingQuicksort", JSON.stringify(ranking.slice(0, 5))); // Top 5
+}
+
+function mostrarRanking() {
+  const lista = document.getElementById("ranking");
+  const dados = JSON.parse(localStorage.getItem("rankingQuicksort") || "[]");
+  lista.innerHTML = "";
+  dados.forEach((item, i) => {
+    lista.innerHTML += `<li><strong>${i + 1}º</strong> ${item.nome} — ${item.acertos} acertos</li>`;
+  });
+  document.getElementById("rankingBox").style.display = "block";
+}
+</script>
+
+</body>
+</html>
