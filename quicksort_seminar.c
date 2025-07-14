@@ -364,7 +364,7 @@ int main() {
     printf("🚀 SEMINÁRIO FINAL: QUICKSORT\n");
     printf("==============================\n");
     printf("Algoritmos e Estruturas de Dados I - Sistemas de Informação\n");
-    printf("Data: 16/07/2025\n");
+    printf("Data: 14/07/2025\n");
     printf("Equipe: Kaio Sobral, Gustavo Souza, Felipe Rangel\n");
     
     int opcao;
