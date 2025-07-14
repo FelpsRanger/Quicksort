@@ -13,6 +13,14 @@
 - **Felipe Rangel** - Testes e Conclusões
 
 ---
+# 🔗 Links
+- [Pythontutor](https://pythontutor.com/c.html#mode=edit)
+- [GDB](https://www.onlinegdb.com/online_c_compiler)
+- [VisuAlgo](https://visualgo.net/en/sorting)
+- [Quiz](https://felpsranger.github.io/seminario-quicksort/)
+- [Jupyter Notebooks](https://jupyter.org/) 
+
+---
 
 ## 🎯 Objetivo
 Apresentar e analisar profundamente o algoritmo Quicksort de forma teórica, prática e comparativa, utilizando criatividade e clareza na apresentação através de implementação em linguagem C.
@@ -306,4 +314,3 @@ Este projeto é de uso educacional e está disponível sob a licença MIT.
 
 ---
 
-**Boa sorte na apresentação! 🎉**
