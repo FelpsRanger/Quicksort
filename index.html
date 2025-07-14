@@ -457,23 +457,133 @@
     </div>
 
     <div class="question">
-      <div class="question-title">5. Se o Quicksort fosse uma banda, seria...</div>
+      <div class="question-title">5. O melhor caso do Quicksort é como escolher cervejas num bar...</div>
       <div class="radio-group">
         <label class="radio-option">
           <input type="radio" name="q5" value="b">
-          <span>🤘 Metallica — rápido e eficiente</span>
+          <span>🍺 Heineken — sempre no meio, divide perfeitamente os gostos</span>
         </label>
         <label class="radio-option">
           <input type="radio" name="q5" value="a">
-          <span>🎹 Coldplay — previsível</span>
+          <span>🍻 Skol — todo mundo pega, não divide nada</span>
         </label>
         <label class="radio-option">
           <input type="radio" name="q5" value="c">
-          <span>🎸 Beatles — bom, mas antigo</span>
+          <span>🍺 Budweiser — muito cara, só os ricos pegam</span>
         </label>
         <label class="radio-option">
           <input type="radio" name="q5" value="d">
+          <span>🍺 Brahma — muito popular, deixa o bar desequilibrado</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-title">6. Se o Quicksort fosse uma banda, seria...</div>
+      <div class="radio-group">
+        <label class="radio-option">
+          <input type="radio" name="q6" value="b">
+          <span>🤘 Metallica — rápido e eficiente</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="q6" value="a">
+          <span>🎹 Coldplay — previsível</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="q6" value="c">
+          <span>🎸 Beatles — bom, mas antigo</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="q6" value="d">
           <span>🎤 Mamonas Assassinas — rápido, mas caótico</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-title">7. O Quicksort numa pizzaria seria o garçom que...</div>
+      <div class="radio-group">
+        <label class="radio-option">
+          <input type="radio" name="q7" value="b">
+          <span>🍕 Divide a mesa em dois grupos: quem já pediu e quem não pediu</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="q7" value="a">
+          <span>🍝 Anota todos os pedidos de uma vez</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="q7" value="c">
+          <span>🥤 Só serve as bebidas primeiro</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="q7" value="d">
+          <span>🍰 Esquece metade dos pedidos</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-title">8. Se algoritmos fossem apps de namoro, o Quicksort seria...</div>
+      <div class="radio-group">
+        <label class="radio-option">
+          <input type="radio" name="q8" value="b">
+          <span>💕 Tinder — swipe rápido, divide em "sim" e "não"</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="q8" value="a">
+          <span>📱 WhatsApp — conversa com todo mundo</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="q8" value="c">
+          <span>💌 Correio — muito devagar</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="q8" value="d">
+          <span>📞 Telefone fixo — antiquado</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-title">9. O pior pesadelo do Quicksort é como...</div>
+      <div class="radio-group">
+        <label class="radio-option">
+          <input type="radio" name="q9" value="b">
+          <span>🎯 Jogar dardo sempre na ponta do alvo — nunca no centro</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="q9" value="a">
+          <span>🎲 Dados viciados que sempre caem no 6</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="q9" value="c">
+          <span>🎪 Circo sem palhaços</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="q9" value="d">
+          <span>🌧️ Chuva em dia de praia</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-title">10. Se o Quicksort fosse um chefe de cozinha, ele...</div>
+      <div class="radio-group">
+        <label class="radio-option">
+          <input type="radio" name="q10" value="b">
+          <span>👨‍🍳 Escolheria um prato principal e organizaria os acompanhamentos ao redor</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="q10" value="a">
+          <span>🍜 Cozinharia tudo na mesma panela</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="q10" value="c">
+          <span>🥘 Faria apenas pratos vegetarianos</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="q10" value="d">
+          <span>🍔 Só faria fast food</span>
         </label>
       </div>
     </div>
@@ -495,7 +605,7 @@
 <script>
 // Atualizar barra de progresso
 function atualizarProgresso() {
-  const totalPerguntas = 5;
+  const totalPerguntas = 10;
   let respondidas = 0;
   
   for (let i = 1; i <= totalPerguntas; i++) {
@@ -525,12 +635,12 @@ document.querySelectorAll('input[type="radio"]').forEach(radio => {
 });
 
 function verificarRespostas() {
-  const respostas = { q1: 'b', q2: 'b', q3: 'b', q4: 'c', q5: 'b' };
+  const respostas = { q1: 'b', q2: 'b', q3: 'b', q4: 'c', q5: 'b', q6: 'b' };
   let acertos = 0;
   let perguntasRespondidas = 0;
 
   // Verificar se todas as perguntas foram respondidas
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 6; i++) {
     const marcada = document.querySelector(`input[name="q${i}"]:checked`);
     if (marcada) {
       perguntasRespondidas++;
@@ -538,7 +648,7 @@ function verificarRespostas() {
     }
   }
 
-  if (perguntasRespondidas < 5) {
+  if (perguntasRespondidas < 6) {
     alert("⚠️ Por favor, responda todas as perguntas antes de continuar!");
     return;
   }
@@ -553,11 +663,11 @@ function verificarRespostas() {
   const resultado = document.getElementById("resultado");
   let mensagem, classe, emoji;
 
-  if (acertos === 5) {
+  if (acertos === 6) {
     mensagem = "Você é um verdadeiro mestre do Quicksort! 🧠✨";
     classe = "success";
     emoji = "🏆";
-  } else if (acertos >= 3) {
+  } else if (acertos >= 4) {
     mensagem = "Mandou bem! Você tá quase um pivô profissional. 👏";
     classe = "warning";
     emoji = "🥈";
@@ -570,7 +680,7 @@ function verificarRespostas() {
   resultado.innerHTML = `
     <div style="font-size: 3em; margin-bottom: 15px;">${emoji}</div>
     <div style="font-size: 1.4em; margin-bottom: 10px;"><strong>${nome}</strong></div>
-    <div style="font-size: 1.2em; margin-bottom: 15px;">Você acertou <strong>${acertos}</strong> de 5 perguntas!</div>
+    <div style="font-size: 1.2em; margin-bottom: 15px;">Você acertou <strong>${acertos}</strong> de 6 perguntas!</div>
     <div style="font-size: 1.1em;">${mensagem}</div>
   `;
   
@@ -643,7 +753,7 @@ function mostrarRanking() {
             <strong>${item.nome}</strong>
             <small style="opacity: 0.7; margin-left: 10px;">(${item.data})</small>
           </div>
-          <span class="score-badge">${item.acertos}/5</span>
+          <span class="score-badge">${item.acertos}/6</span>
         </li>
       `;
     });
