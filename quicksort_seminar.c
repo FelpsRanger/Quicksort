@@ -393,7 +393,6 @@ int main() {
                 break;
             case 0:
                 printf("\n🎓 Obrigado por usar o simulador Quicksort!\n");
-                printf("Boa sorte na apresentação do seminário!\n");
                 break;
             default:
                 printf("Opção inválida! Tente novamente.\n");
