@@ -13,7 +13,7 @@
 - **Felipe Rangel** - Testes e Conclusões
 
 ---
-# 🔗 Links
+## 🔗 Links
 - [Pythontutor](https://pythontutor.com/c.html#mode=edit)
 - [GDB](https://www.onlinegdb.com/online_c_compiler)
 - [VisuAlgo](https://visualgo.net/en/sorting)
